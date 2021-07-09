@@ -2,3 +2,5 @@
 
 [node name="Main" type="Node2D"]
 scale = Vector2( 2, 2 )
+
+[node name="GUI" type="Node2D" parent="."]
