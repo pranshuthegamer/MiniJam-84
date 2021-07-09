@@ -15,10 +15,11 @@ transform = Transform2D( 1, 0, 0, 1, 0.78, 0 )
 follow_viewport_enable = true
 
 [node name="Label" type="Label" parent="."]
-anchor_top = 0.8
-anchor_right = 0.993
+anchor_top = 0.978
+anchor_right = 0.999
 anchor_bottom = 1.0
-margin_right = 8.95996
+margin_top = -128.16
+margin_right = 1.27979
 custom_fonts/font = SubResource( 1 )
 text = "Made By:
 PranshuTG
