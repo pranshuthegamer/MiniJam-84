@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed = 200.0
+export var speed = 150.0
 var velocity = Vector2()
 var shooting = false
 var ShotSpeed = 0
@@ -41,7 +41,7 @@ var weapons = [{
 
 
 
-var bullet = preload("res://Scenes/NotLevels/Ammo.tscn")
+var bullet = Auto.EnemyBullet
 
 func _ready():
 	changeWeapon()

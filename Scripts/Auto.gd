@@ -4,6 +4,9 @@ var MainScene = null
 var Player = preload("res://Scenes/Player.tscn").instance()
 var ingame = false
 
+var EnemyBullet = preload("res://Scenes/NotLevels/AmmoEnemy.tscn")
+
+
 func Start():
 	MainScene.add_child(Player)
 	ingame = true
