@@ -9,6 +9,8 @@ var recoil_timer
 var recoiltime = 0
 var currentweapon = 0
 
+onready var target = null
+
 var recoil = 1
 var damage = 1
 var spray = 1
@@ -30,7 +32,7 @@ var weapons = [{
 	"name":"Slow",
 	"damage":15,
 	"speed":0.17,
-	"recoil":1.5,
+	"recoil":1,
 	"spray":0.05,
 	"MaxSpray":0.25}
 	]
@@ -46,11 +48,13 @@ func _ready():
 
 func _process(delta):
 	
+	
 	ShotSpeed += delta
 	
 	if health <= 0:
-		health = 100
-	$BarrelHolder.look_at(get_global_mouse_position())
+		pass
+	if target != null:
+		$BarrelHolder.look_at(target.global_position)
 	
 	#if the shot cooldown is met, the player shoots
 	if shooting and ShotSpeed >= ShootingSpeed:
@@ -79,20 +83,17 @@ func _process(delta):
 		recoiltime += delta
 	
 	#checks if you released left click
-	if Input.is_action_just_released("click"):
-		shooting = false
 
 
 func _physics_process(_delta):
-	get_input()
+	velocity = Vector2.ZERO
+	if target != null:
+		if shooting == true:
+			pass
+		elif shooting == false:
+			velocity = Vector2(speed,0).rotated($BarrelHolder.rotation)
 	move_and_slide = move_and_slide(velocity)
 
-#Shooting
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and event.is_action("click") and get_node("/root/Auto").ingame == true:
-		shooting = true
-	if Input.is_key_pressed(KEY_K):
-		changeWeapon()
 
 #func change weapon
 func changeWeapon():
@@ -108,28 +109,17 @@ func changeWeapon():
 	recoil = temp["recoil"]
 	ShotSpeed = 0
 
-#healthbar
-func updatehealth():
-	$HealthBar/Control/Health.value = health
-
 #Reduces Health
 func hit(dmg):
 	health -= dmg 
-	updatehealth()
-	print(health)
 
-#Player Movement
-func get_input():
-	var shift = 1
-	velocity = Vector2()
-	if Input.is_action_pressed('ui_right'):
-		velocity.x += 1
-	if Input.is_action_pressed('ui_left'):
-		velocity.x -= 1
-	if Input.is_action_pressed('ui_down'):
-		velocity.y += 1
-	if Input.is_action_pressed('ui_up'):
-		velocity.y -= 1
-	if Input.is_key_pressed(KEY_SHIFT):
-		shift = 1.5
-	velocity = velocity.normalized() * speed * shift
+
+func _on_Area2D_body_entered(body):
+	if body == Auto.Player:
+		target = Auto.Player
+		shooting = true
+
+
+func _on_Area2D_body_exited(body):
+	if body == Auto.Player:
+		shooting = false
