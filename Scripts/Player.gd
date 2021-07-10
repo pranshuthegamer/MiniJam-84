@@ -22,7 +22,7 @@ var health = 100
 var weapons = [{
 	"name":"SMG",
 	"damage":5,
-	"speed":0.04,
+	"speed":0.03,
 	"recoil":0.7,
 	"spray":0.1,
 	"MaxSpray":0.2},
@@ -50,19 +50,18 @@ func _process(delta):
 	
 	if health <= 0:
 		Auto.died()
-	$Barrel.look_at(get_global_mouse_position())
+	$BarrelHolder.look_at(get_global_mouse_position())
 	
 	#if the shot cooldown is met, the player shoots
 	if shooting and ShotSpeed >= ShootingSpeed:
 		#recoil
-		position -= transform.x * recoil
+		#position -= transform.x * recoil
 		#spawns bullet
 		var shot = bullet.instance()
 		get_node("/root/Main").add_child(shot)
 		shot.damage = damage
-		shot.transform.y = $Barrel.transform.y
-		shot.transform.x = $Barrel.transform.x
-		shot.position = $Barrel.global_position / 4
+		shot.rotation = $BarrelHolder.rotation
+		shot.position = $BarrelHolder/Barrel.global_position / 4
 		#adds spray
 		var tempspray = spray + (recoiltime/1000)
 		if tempspray >= MaxSpray:
