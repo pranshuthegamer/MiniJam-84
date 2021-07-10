@@ -1,15 +1,25 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Fonts/Roboto/Roboto-Medium.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Icons/StartGreen.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Icons/StartRed.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
 extra_spacing_char = 2
 font_data = ExtResource( 1 )
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[sub_resource type="GDScript" id=2]
+script/source = "extends TouchScreenButton
+
+
+func _on_Start_released():
+	Auto.Start()
+	get_parent().queue_free()
+"
+
+[node name="MainMenu" type="CanvasLayer"]
 offset = Vector2( 0.78, 0 )
 scale = Vector2( 4, 4 )
 transform = Transform2D( 4, 0, 0, 4, 0.78, 0 )
@@ -19,9 +29,10 @@ follow_viewport_enable = true
 anchor_top = 0.161
 anchor_right = 0.25
 anchor_bottom = 0.25
-margin_left = 64.0
-margin_top = 0.0799866
-margin_right = -64.0
+margin_left = 63.805
+margin_top = -3.92
+margin_right = -64.195
+margin_bottom = -3.99998
 custom_fonts/font = SubResource( 1 )
 text = "Made By:
 PranshuTG
@@ -31,3 +42,12 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Start" type="TouchScreenButton" parent="."]
+position = Vector2( 103.805, 66 )
+scale = Vector2( 1.75, 1.875 )
+normal = ExtResource( 2 )
+pressed = ExtResource( 3 )
+shape_centered = false
+script = SubResource( 2 )
+[connection signal="released" from="Start" to="Start" method="_on_Start_released"]
