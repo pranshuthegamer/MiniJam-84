@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed = 100.0
+export var speed = 200.0
 var velocity = Vector2()
 var shooting = false
 var ShotSpeed = 0
@@ -20,17 +20,17 @@ var health = 100
 #Weapons
 
 var weapons = [{
-	"name":"SMG",
+	"name":"Fast",
 	"damage":5,
 	"speed":0.03,
-	"recoil":0.7,
+	"recoil":0.5,
 	"spray":0.1,
 	"MaxSpray":0.2},
 	{
-	"name":"AR",
+	"name":"Slow",
 	"damage":15,
 	"speed":0.17,
-	"recoil":2,
+	"recoil":1.5,
 	"spray":0.05,
 	"MaxSpray":0.25}
 	]
@@ -55,7 +55,7 @@ func _process(delta):
 	#if the shot cooldown is met, the player shoots
 	if shooting and ShotSpeed >= ShootingSpeed:
 		#recoil
-		#position -= transform.x * recoil
+		position -= Vector2(recoil,0).rotated($BarrelHolder.rotation)
 		#spawns bullet
 		var shot = bullet.instance()
 		get_node("/root/Main").add_child(shot)
@@ -105,6 +105,7 @@ func changeWeapon():
 	damage = temp["damage"]
 	ShootingSpeed = temp["speed"]
 	spray = temp["spray"]
+	recoil = temp["recoil"]
 	ShotSpeed = 0
 
 #Reduces Health
