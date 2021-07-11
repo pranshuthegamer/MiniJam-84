@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Player/Player.png" type="Texture" id=2]
+[ext_resource path="res://Assets/light.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 60.531
+radius = 60.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 height = 8.0
@@ -32,11 +33,18 @@ position = Vector2( 0, 8 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BarrelHolder/Area2D"]
 position = Vector2( 0, -8 )
-polygon = PoolVector2Array( 0, 0, 56, -28, 60, 0, 56, 28 )
+scale = Vector2( 1.6, 1.6 )
+polygon = PoolVector2Array( 0, 0, 48, -35, 52, -30, 58, -16, 60, 0, 58, 15, 52, 30, 48, 35 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelHolder/Area2D"]
+visible = false
 position = Vector2( 0, -8 )
 shape = SubResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="BarrelHolder"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+offset = Vector2( 1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )

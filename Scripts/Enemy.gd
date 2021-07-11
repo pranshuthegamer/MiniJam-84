@@ -51,7 +51,7 @@ func _process(delta):
 	ShotSpeed += delta
 	
 	if target == null:
-		$BarrelHolder.rotation_degrees += 100 * delta
+		$BarrelHolder.rotation_degrees += 50 * delta
 	
 	if health <= 0:
 		Auto.EnemyDied(self)
