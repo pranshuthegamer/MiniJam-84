@@ -63,6 +63,7 @@ func _process(delta):
 		shot.direction = $BarrelHolder.rotation
 		shot.position = $BarrelHolder/Barrel.global_position / 4
 		shot.parent = self
+		shot.parentname = name
 		#adds spray
 		var tempspray = spray + (recoiltime/1000)
 		if tempspray >= MaxSpray:
@@ -116,7 +117,6 @@ func updatehealth():
 func hit(dmg):
 	health -= dmg 
 	updatehealth()
-	print(health)
 
 #Player Movement
 func get_input():

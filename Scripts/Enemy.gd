@@ -16,7 +16,7 @@ export var spray = 0.01
 export var MaxSpray = 0.1
 export var ShootingSpeed = 0.10
 
-var health = 100
+export var health = 100
 
 #Weapons
 
@@ -51,7 +51,7 @@ func _process(delta):
 	ShotSpeed += delta
 	
 	if health <= 0:
-		pass
+		Auto.EnemyDied(self)
 	if target != null:
 		$BarrelHolder.look_at(target.global_position)
 	
@@ -66,6 +66,7 @@ func _process(delta):
 		shot.direction = $BarrelHolder.rotation
 		shot.position = $BarrelHolder/Barrel.global_position / 4
 		shot.parent = self
+		shot.parentname = name
 		#adds spray
 		var tempspray = spray + (recoiltime/1000)
 		if tempspray >= MaxSpray:
@@ -111,7 +112,6 @@ func changeWeapon():
 #Reduces Health
 func hit(dmg):
 	health -= dmg 
-
 
 func _on_Area2D_body_entered(body):
 	if body == Auto.Player:
