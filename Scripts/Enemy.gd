@@ -10,12 +10,11 @@ var recoiltime = 0
 var currentweapon = 0
 
 onready var target = null
-
-var recoil = 1
-var damage = 1
-var spray = 1
-var MaxSpray = 1
-var ShootingSpeed = 0.15
+export var recoil = 5.0
+export var damage = 10.0
+export var spray = 0.01
+export var MaxSpray = 0.1
+export var ShootingSpeed = 0.10
 
 var health = 100
 
@@ -44,7 +43,7 @@ var weapons = [{
 var bullet = Auto.EnemyBullet
 
 func _ready():
-	changeWeapon()
+	pass
 
 func _process(delta):
 	

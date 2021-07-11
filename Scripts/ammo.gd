@@ -1,12 +1,12 @@
 extends Area2D
 
-var speed = 5
+var speed = 400
 var damage = null
 var direction = null
 var parent = null
 
 func _physics_process(delta):
-	position += Vector2(speed,0).rotated(direction)
+	position += Vector2(speed,0).rotated(direction) * delta
 
 
 func _on_bullet_body_entered(body):

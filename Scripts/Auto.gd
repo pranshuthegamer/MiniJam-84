@@ -8,6 +8,7 @@ var EnemyBullet = preload("res://Scenes/NotLevels/AmmoEnemy.tscn")
 
 
 func Start():
+	MainScene.add_child(load("res://Scenes/Levels/Level1.tscn").instance())
 	MainScene.add_child(Player)
 	ingame = true
 
