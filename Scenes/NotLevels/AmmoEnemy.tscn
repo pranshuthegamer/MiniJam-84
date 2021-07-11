@@ -14,10 +14,13 @@ scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.9875, 1 )
+position = Vector2( 0, 1.25 )
+scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 1 )
 vframes = 5
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
