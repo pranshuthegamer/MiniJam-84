@@ -13,7 +13,7 @@ level = 2
 position = Vector2( 166, 64 )
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 306, 64 )
+position = Vector2( 248, 64 )
 
 [node name="SpawnPos" type="Node2D" parent="."]
 position = Vector2( 192, 192 )
