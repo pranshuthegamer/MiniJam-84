@@ -17,6 +17,7 @@ var ShootingSpeed = 0.15
 
 var health = 100
 
+var score = 0
 #Weapons
 
 var weapons = [{
@@ -41,15 +42,18 @@ var weapons = [{
 
 var bullet = preload("res://Scenes/NotLevels/Ammo.tscn")
 
-func _ready():
+func _enter_tree():
 	changeWeapon()
 
 func _process(delta):
 	
 	ShotSpeed += delta
 	
+	if Auto.ingame == false:
+		shooting = false
+	
 	if health <= 0:
-		health = 100
+		Auto.playerdead()
 	$BarrelHolder.look_at(get_global_mouse_position())
 	
 	#if the shot cooldown is met, the player shoots

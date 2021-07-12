@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 400
+var speed = 300
 var damage = null
 var direction = null
 var parent = null

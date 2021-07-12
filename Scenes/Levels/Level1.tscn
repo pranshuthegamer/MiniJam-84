@@ -16,4 +16,4 @@ position = Vector2( 166, 64 )
 position = Vector2( 248, 64 )
 
 [node name="SpawnPos" type="Node2D" parent="."]
-position = Vector2( 192, 192 )
+position = Vector2( 192, 232 )

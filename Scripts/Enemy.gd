@@ -2,14 +2,17 @@ extends KinematicBody2D
 
 export var speed = 150.0
 var velocity = Vector2()
+var RandVel = Vector2()
 var shooting = false
 var ShotSpeed = 0
 var move_and_slide
 var recoil_timer
 var recoiltime = 0
 var currentweapon = 0
+var rng = RandomNumberGenerator.new()
+var randomtimer = Timer
 
-onready var target = null
+var target = null
 export var recoil = 5.0
 export var damage = 10.0
 export var spray = 0.01
@@ -44,6 +47,22 @@ var bullet = Auto.EnemyBullet
 
 func _ready():
 	pass
+
+func _enter_tree():
+	target = null
+	randomtimer = Timer.new()
+	randomtimer.connect("timeout",self,"Randmovement")
+	randomtimer.autostart = true
+	add_child(randomtimer)
+	randomtimer.start(1)
+
+func Randmovement():
+	if target == null:
+		rng.randomize()
+		RandVel = Vector2(rng.randf_range(-1,1),rng.randf_range(-1,1))
+		RandVel = RandVel.normalized()
+		RandVel *= 150
+	randomtimer.start(2)
 
 func _process(delta):
 	
@@ -95,6 +114,8 @@ func _physics_process(_delta):
 			pass
 		elif shooting == false:
 			velocity = Vector2(speed,0).rotated($BarrelHolder.rotation)
+	else:
+		velocity = RandVel
 	move_and_slide = move_and_slide(velocity)
 
 
